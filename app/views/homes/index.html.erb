@@ -1,11 +1,16 @@
-<ul>
+<ol>
   <% @page.links.each do |link| %>
-    <% if link.href != nil %>
-      <% url = link.href.gsub(/^(?!http(.*)$).*/,"") %>
-      <% url = link.href.gsub(/(.*)microsoft.com(.*)/,"") %>
-      <% if url.length != 0 %>
-        <li><%= link_to link.text, url %></li>
+    <% if link.href != nil && link.text != nil%>
+      <% url = link.href.gsub(/(.*)aol(.*)/,"") %>
+      <% url = url.gsub(/(.*)google.com(.*)/,"") %>
+      <% url = url.gsub(/(.*)search?(.*)/,"") %>
+      <% url = url.gsub(/(.*)about?(.*)/,"") %>
+      <% url = url.gsub(/javascript(.*)/,"") %>
+      <% text = link.text.gsub(/(.*)More »(.*)/,"") %>
+      <% text = text.gsub(/(.*)Mobile Site(.*)/,"") %>
+      <% if url.length != 0 && text.length != 0 %>
+        <li><%= link_to text, url %></li>
       <% end %>
     <% end %>
   <% end %>
-</ul>
+</ol>
