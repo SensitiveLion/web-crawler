@@ -1,0 +1,11 @@
+<ul>
+  <% @page.links.each do |link| %>
+    <% if link.href != nil %>
+      <% url = link.href.gsub(/^(?!http(.*)$).*/,"") %>
+      <% url = link.href.gsub(/(.*)microsoft.com(.*)/,"") %>
+      <% if url.length != 0 %>
+        <li><%= link_to link.text, url %></li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
