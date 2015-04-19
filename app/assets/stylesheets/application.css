@@ -15,3 +15,8 @@
  *= require foundation_and_overrides
 
  */
+
+ ol {
+  position: absolute;
+  left:50px;
+ }

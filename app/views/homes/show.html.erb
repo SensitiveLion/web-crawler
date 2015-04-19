@@ -1,76 +1,122 @@
 google
-<ul>
-  <% @page.links.each do |link| %>
-    <% url = link.href.gsub(/.url\?q\=/,"" ) %>
-    <% url = url.gsub(/&sa=U&ei=(.*)/,"" ) %>
-    <% url = url.gsub(/.search?(.*)/,"" ) %>
-    <% url = url.gsub(/(.*)google.com(.*)/,"" ) %>
-    <% url = url.gsub(/(.*)webcache.(.*)/,"" ) %>
-    <% if url.length != 0 %>
-      <li><%= link_to link.text, url %></li>
-    <% end %>
-  <% end %>
-</ul>
+
+  page.links.each do |link|
+    url = link.href.gsub(/.url\?q\=/,"" )
+    url = url.gsub(/&sa=U&ei=(.*)/,"" )
+    url = url.gsub(/.search?(.*)/,"" )
+    url = url.gsub(/(.*)google.com(.*)/,"" )
+    url = url.gsub(/(.*)webcache.(.*)/,"" )
+    if url.length != 0
+       link_to link.text, url/
+    end
+  end
+
 
 bing
 
-@bing = Mechanize.new
-@page = @bing.get('https://search.yahoo.com/')
-@bing_form = @page.form()
-@bing_form.q = 'ruby mechanize'
-@page = @bing.submit(@bing_form)
+bing = Mechanize.new
+page = bing.get('https://bing.com/')
+bing_form = page.form()
+bing_form.q = 'ruby mechanize'
+page = bing.submit(bing_form)
 
-<ul>
-  <% @page.links.each do |link| %>
-    <% if link.href != nil && link.text != nil%>
-      <% url = link.href.gsub(/^(?!http(.*)$).*/,"") %>
-      <% url = url.gsub(/(.*)microsoft.com(.*)/,"") %>
-      <% if url.length != 0 && link.text != 0 %>
-        <li><%= link_to link.text, url %></li>
-      <% end %>
-    <% end %>
-  <% end %>
-</ul>
 
-@bing = Mechanize.new
-@page = @bing.get('https://search.yahoo.com/')
-@bing_form = @page.form('s')
-@bing_form.p = 'ruby mechanize'
-@page = @bing.submit(@bing_form)
+  page.links.each do |link|
+    if link.href != nil && link.text != nil
+      url = link.href.gsub(/^(?!http(.*)$).*/,"")
+      url = url.gsub(/(.*)microsoft.com(.*)/,"")
+      if url.length != 0 && link.text != 0
+         link_to link.text, url/
+      end
+    end
+  end
 
-<ul>
-  <% @page.links.each do |link| %>
-    <% if link.href != nil && link.text != nil%>
-      <% url = link.href.gsub(/(.*)yahoo(.*)/,"") %>
-      <% url = url.gsub(/(.*)flickr.com(.*)/,"") %>
-      <% url = url.gsub(/javascript(.*)/,"") %>
-      <% url = url.gsub(/(.*)cache.aspx(.*)/,"") %>
-      <% if url.length != 0 && link.text != 0 %>
-        <li><%= link_to link.text, url %></li>
-      <% end %>
-    <% end %>
-  <% end %>
-</ul>
 
-@bing = Mechanize.new
-@page = @bing.get('http://www.ask.com/')
-@bing_form = @page.form()
-@bing_form.q = 'ruby mechanize'
-@page = @bing.submit(@bing_form)
+bing = Mechanize.new
+page = bing.get('https://search.yahoo.com/')
+bing_form = page.form('s')
+bing_form.p = 'ruby mechanize'
+page = bing.submit(bing_form)
 
-<ol>
-  <% @page.links.each do |link| %>
-    <% if link.href != nil && link.text != nil%>
-      <% url = link.href.gsub(/(.*)ask.com(.*)/,"") %>
-      <% url = url.gsub(/(.*)answers.yahoo(.*)/,"") %>
-      <% url = url.gsub(/javascript(.*)/,"") %>
-      <% text = link.text.gsub(/(.*)More »(.*)/,"") %>
-      <% text = text.gsub(/(.*)Mobile Site(.*)/,"") %>
-      <% if url.length != 0 && text.length != 0 %>
-        <li><%= link_to text, url %></li>
-      <% end %>
-    <% end %>
-  <% end %>
-</ol>
+
+  page.links.each do |link|
+    if link.href != nil && link.text != nil
+      url = link.href.gsub(/(.*)yahoo(.*)/,"")
+      url = url.gsub(/(.*)flickr.com(.*)/,"")
+      url = url.gsub(/javascript(.*)/,"")
+      url = url.gsub(/(.*)cache.aspx(.*)/,"")
+      if url.length != 0 && link.text != 0
+         link_to link.text, url/
+      end
+    end
+  end
+
+
+bing = Mechanize.new
+page = bing.get('http://www.ask.com/')
+bing_form = page.form()
+bing_form.q = 'ruby mechanize'
+page = bing.submit(bing_form)
+
+
+  page.links.each do |link|
+    if link.href != nil && link.text != nil
+      url = link.href.gsub(/(.*)ask.com(.*)/,"")
+      url = url.gsub(/(.*)answers.yahoo(.*)/,"")
+      url = url.gsub(/javascript(.*)/,"")
+      text = link.text.gsub(/(.*)More »(.*)/,"")
+      text = text.gsub(/(.*)Mobile Site(.*)/,"")
+      if url.length != 0 && text.length != 0
+         link_to text, url/
+      end
+    end
+  end
+/
+
+goggle = Mechanize.new
+page = goggle.get('http://search.aol.com/aol/webhome')
+goggle_form = page.form('CSBsearchForm1')
+goggle_form.q = 'ruby mechanize'
+page = goggle.submit(goggle_form)
+
+
+  page.links.each do |link|
+    if link.href != nil && link.text != nil
+      url = link.href.gsub(/(.*)aol(.*)/,"")
+      url = url.gsub(/(.*)google.com(.*)/,"")
+      url = url.gsub(/(.*)search?(.*)/,"")
+      url = url.gsub(/(.*)about?(.*)/,"")
+      url = url.gsub(/javascript(.*)/,"")
+      url = url.gsub(/^(?!http(.*)$).*/,"")
+      text = link.text.gsub(/(.*)More »(.*)/,"")
+      text = text.gsub(/(.*)Mobile Site(.*)/,"")
+      if url.length != 0 && text.length != 0
+         url
+      end
+    end
+  end
+
+
+goggle = Mechanize.new
+page = goggle.get('http://www.wow.com/')
+goggle_form = page.form('SearchBoxForm')
+goggle_form.q = 'ruby mechanize'
+page = goggle.submit(goggle_form)
+
+
+  page.links.each do |link|
+    if link.href != nil && link.text != nil
+      url = link.href.gsub(/(.*)wow.com(.*)/,"")
+      url = link.href.gsub(/(.*)wow.nextag.com(.*)/,"")
+      url = url.gsub(/^(?!http(.*)$).*/,"")
+      url = url.gsub(/(.*)aol.com(.*)/,"")
+      text = link.text
+      if url.length != 0 && text.length != 0
+         url
+      end
+    end
+  end
+
+
 
 
